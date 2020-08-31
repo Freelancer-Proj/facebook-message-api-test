@@ -23,16 +23,23 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       $(function () {
-        var socket = io();
+        var socket = io('wss://mullion.huuhienqt.dev', {
+          path: '/socket.io',
+          query: {token: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjUxMDM2YWYyZDgzOWE4NDJhZjQzY2VjZmJiZDU4YWYxYTc1OGVlYTIiLCJ0eXAiOiJKV1QifQ.eyJwcm92aWRlciI6IkxJTkUiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbXVsbGlvbi1iYWRhYyIsImF1ZCI6Im11bGxpb24tYmFkYWMiLCJhdXRoX3RpbWUiOjE1OTg4MDIxNTEsInVzZXJfaWQiOiJsaW5lOjE2NTQ2NjE5ODEiLCJzdWIiOiJsaW5lOjE2NTQ2NjE5ODEiLCJpYXQiOjE1OTg4MDIxNTEsImV4cCI6MTU5ODgwNTc1MSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6e30sInNpZ25faW5fcHJvdmlkZXIiOiJjdXN0b20ifX0.CfkyL9sdQwsOX5Ng3LQzYEiQo3E3UEAXiTMosc0xAM52iOml9wHqApf2a7HnpLuKLTckbkNbZVk5oTZMUJ0szqWj3U5XQw4Pa6Q-98fw4YTf_QDQX-1VA1CqfcdXI22oLo19bzV80tZR4yfle_tsippNrsuve-xxVYou_Hp94RWRauyw6fYstinm_qCBTAW5VQ73FEHTI3l60f774tf-tUPn0yKEI1oimJz1Ec25ELF1ffZCQQII219uwlyoF9rUcacLXR2lQwb6OgRF7ett1eXbXWdSpb5wQNxt7BuUe-Vs82OFSW9EwN5n0aO6i6FukGOImiQLSssUWyyLcz26hA'}
+        });;
         $('form').submit(function(){
-          socket.emit('chat message', $('#m').val());
+          socket.emit('message', {
+            content: $('#m').val(),
+            room_id: '6bb8c1c0-e9c2-11ea-9bba-bf74006a9ce8'
+          });
           $('#m').val('');
           return false;
         });
-        socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
-            console.log(msg)
-          window.scrollTo(0, document.body.scrollHeight);
+        socket.on('message', function(msg){
+          console.log(msg);
+          // $('#messages').append($('<li>').text(msg));
+          //   console.log(msg)
+          // window.scrollTo(0, document.body.scrollHeight);
         });
       });
     </script>
