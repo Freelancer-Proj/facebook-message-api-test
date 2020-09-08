@@ -2,7 +2,7 @@ const express = require('express')
 const middleware = require('@line/bot-sdk').middleware
 const JSONParseError = require('@line/bot-sdk').JSONParseError
 const SignatureValidationFailed = require('@line/bot-sdk').SignatureValidationFailed
-
+const Client = require('@line/bot-sdk').Client;
 const app = express()
 
 const config = {
@@ -10,7 +10,7 @@ const config = {
   channelSecret: 'YOUR_CHANNEL_SECRET'
 }
 
-const client = new line.Client(lineConfig);
+const client = new Client(config);
 
 app.use(middleware(config))
 
