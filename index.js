@@ -1,23 +1,37 @@
-const { countReset } = require('console');
+const express = require('express')
+const middleware = require('@line/bot-sdk').middleware
+const JSONParseError = require('@line/bot-sdk').JSONParseError
+const SignatureValidationFailed = require('@line/bot-sdk').SignatureValidationFailed
 
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var port = process.env.PORT || 4000;
-// var cors = require('cors')
- 
-// app.use(cors())
+const app = express()
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});
+const config = {
+  channelAccessToken: 'YOUR_CHANNEL_ACCESS_TOKEN',
+  channelSecret: 'YOUR_CHANNEL_SECRET'
+}
 
-io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-  });
-});
+const client = new line.Client(lineConfig);
 
-http.listen(port, function(){
-  console.log('listening on *:' + port);
-});
+app.use(middleware(config))
+
+app.post('/webhook', (req, res) => {
+  const event = req.body.events[0];
+  console.log(req.body.events);
+  return client.replyMessage(event.replyToken, {
+    type: 'text',
+    text: JSON.stringify(event)
+  });   
+})
+
+app.use((err, req, res, next) => {
+  if (err instanceof SignatureValidationFailed) {
+    res.status(401).send(err.signature)
+    return
+  } else if (err instanceof JSONParseError) {
+    res.status(400).send(err.raw)
+    return
+  }
+  next(err) // will throw default 500
+})
+
+app.listen(3000)
