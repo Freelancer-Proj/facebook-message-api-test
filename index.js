@@ -15,7 +15,7 @@ const client = new Client(config);
 app.use(middleware(config))
 
 app.get('/webhook', (req, res) => {
-  res.json({});
+  res.status(200).send('run')
 })
 
 app.post('/webhook', (req, res) => {
