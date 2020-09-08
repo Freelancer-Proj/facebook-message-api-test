@@ -14,6 +14,10 @@ const client = new Client(config);
 
 app.use(middleware(config))
 
+app.get('/webhook', (req, res) => {
+  res.json({});
+})
+
 app.post('/webhook', (req, res) => {
   const event = req.body.events[0];
   console.log(req.body.events);
