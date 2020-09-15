@@ -10,22 +10,20 @@ const config = {
   channelSecret: '5857389139b0b38f152f0e5d4e3313be'
 }
 
-// const client = new Client(config);
-
-// app.use(middleware(config))
+const client = new Client(config);
 
 app.get('/webhook', (req, res) => {
   res.status(200).send('run')
 })
 
-// app.post('/webhook', (req, res) => {
-//   const event = req.body.events[0];
-//   console.log(req.body.events);
-//   return client.replyMessage(event.replyToken, {
-//     type: 'text',
-//     text: JSON.stringify(event)
-//   });   
-// })
+app.post('/webhook', middleware(config), (req, res) => {
+  const event = req.body.events[0];
+  console.log(req.body.events);
+  return client.replyMessage(event.replyToken, {
+    type: 'text',
+    text: JSON.stringify(event)
+  });   
+})
 
 // app.use((err, req, res, next) => {
 //   if (err instanceof SignatureValidationFailed) {
