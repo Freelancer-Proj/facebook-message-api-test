@@ -12,7 +12,7 @@ const config = {
 
 // const client = new Client(config);
 
-app.use(middleware(config))
+// app.use(middleware(config))
 
 app.get('/webhook', (req, res) => {
   res.status(200).send('run')
