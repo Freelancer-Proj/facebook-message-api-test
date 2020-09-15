@@ -10,7 +10,7 @@ const config = {
   channelSecret: '5857389139b0b38f152f0e5d4e3313be'
 }
 
-const client = new Client(config);
+// const client = new Client(config);
 
 app.use(middleware(config))
 
