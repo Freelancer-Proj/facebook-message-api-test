@@ -18,14 +18,14 @@ app.get('/webhook', (req, res) => {
   res.status(200).send('run')
 })
 
-app.post('/webhook', (req, res) => {
-  const event = req.body.events[0];
-  console.log(req.body.events);
-  return client.replyMessage(event.replyToken, {
-    type: 'text',
-    text: JSON.stringify(event)
-  });   
-})
+// app.post('/webhook', (req, res) => {
+//   const event = req.body.events[0];
+//   console.log(req.body.events);
+//   return client.replyMessage(event.replyToken, {
+//     type: 'text',
+//     text: JSON.stringify(event)
+//   });   
+// })
 
 // app.use((err, req, res, next) => {
 //   if (err instanceof SignatureValidationFailed) {
