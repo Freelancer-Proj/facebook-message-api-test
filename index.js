@@ -13,15 +13,15 @@ const config = {
 const client = new Client(config);
 
 app.get('/webhook', (req, res) => {
-  res.status(200).send('run')
+  res.status(200).send('run 1')
 })
 
 app.post('/webhook', middleware(config), (req, res) => {
   const event = req.body.events[0];
-  console.log(req.body.events);
+  console.log(req.body);
   return client.replyMessage(event.replyToken, {
     type: 'text',
-    text: JSON.stringify(event)
+    text: 'answer'
   });   
 })
 
