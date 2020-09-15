@@ -27,15 +27,15 @@ app.post('/webhook', (req, res) => {
   });   
 })
 
-app.use((err, req, res, next) => {
-  if (err instanceof SignatureValidationFailed) {
-    res.status(401).send(err.signature)
-    return
-  } else if (err instanceof JSONParseError) {
-    res.status(400).send(err.raw)
-    return
-  }
-  next(err) // will throw default 500
-})
+// app.use((err, req, res, next) => {
+//   if (err instanceof SignatureValidationFailed) {
+//     res.status(401).send(err.signature)
+//     return
+//   } else if (err instanceof JSONParseError) {
+//     res.status(400).send(err.raw)
+//     return
+//   }
+//   next(err) // will throw default 500
+// })
 
 app.listen(process.env.PORT || 3000)
