@@ -18,7 +18,7 @@ app.get('/webhook', (req, res) => {
 
 app.post('/webhook', middleware(config), (req, res) => {
   const event = req.body.events[0];
-  console.log(req.body);
+  console.log(JSON.stringify(req.body));
   return client.replyMessage(event.replyToken, {
     type: 'text',
     text: 'answer'
