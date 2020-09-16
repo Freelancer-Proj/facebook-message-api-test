@@ -3,7 +3,7 @@ const middleware = require('@line/bot-sdk').middleware
 const JSONParseError = require('@line/bot-sdk').JSONParseError
 const SignatureValidationFailed = require('@line/bot-sdk').SignatureValidationFailed
 const Client = require('@line/bot-sdk').Client;
-const app = express()
+const app = express().use(bodyParser.json());
 
 const config = {
   channelAccessToken: 'HHOAAfmTTnbT3Y+pkdLqDgSlroaDflSHlhO7SZ+LU6qnfgOKVS4lWaV8OTDL16J/uA4dCshzyyhLhMoXQl1Srh5Un3vmQ0nCrC3KGnWGIogQ0KHzzzOhz5Z2cnFhkTEOV3GCaR97va15dJgN7YQA3gdB04t89/1O/w1cDnyilFU=',
@@ -70,4 +70,4 @@ app.post('/webhook', (req, res) => {
 })
 
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 1337)
