@@ -12,7 +12,7 @@ const config = {
 
 const client = new Client(config);
 
-app.get('/webhook', (req, res) => {
+app.get('/', (req, res) => {
   res.status(200).send('run facebook')
 })
 
