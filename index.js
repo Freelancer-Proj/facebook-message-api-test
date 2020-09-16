@@ -12,7 +12,7 @@ const config = {
 
 const client = new Client(config);
 
-app.get('/', (req, res) => {
+app.get('/a', (req, res) => {
   res.status(200).send('run facebook')
 })
 
